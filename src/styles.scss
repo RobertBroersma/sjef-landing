@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+@import "assets/styles/atoms/reset";
+@import "assets/styles/atoms/variables";
+@import "assets/styles/atoms/colors";
+@import "assets/styles/atoms/fonts";
+@import "assets/styles/atoms/typography";
+@import "assets/styles/atoms/utilities";
+@import "assets/styles/atoms/sections";
+@import "assets/styles/atoms/logo";
+@import "assets/styles/atoms/buttons";
+@import "assets/styles/atoms/input";
+@import "assets/styles/atoms/animation";
+
+@import "components/header/header";
+@import "components/usp/usp.scss";
+@import "components/footer/footer.scss";
+@import "components/mealplanner/mealplanner.scss";
+@import "components/spinner/spinner.scss";

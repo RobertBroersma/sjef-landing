@@ -1,0 +1,28 @@
+.Usp {
+    max-width: 240px;
+    padding: 0 20px;
+}
+
+.Usp__image {
+    height: 120px;
+    padding-bottom: 15px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.Usp__image:after {
+    content: '';
+    background-image: url('/assets/img/x.svg');
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    bottom: -20px;
+}
+
+.Usp__image img {
+    width: 100px;
+    align-self: flex-end;
+}

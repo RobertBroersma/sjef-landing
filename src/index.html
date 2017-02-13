@@ -1,14 +1,84 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>SjefLanding</title>
-  <base href="/">
+    <meta charset="utf-8">
+    <title>Sjef - Zet je dieet op de automatische piloot!</title>
+    <base href="/">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- TODO: Replace with self hosted md icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-  <app-root>Loading...</app-root>
+    <header class="Header">
+        <div class="container full-height-md" >
+            <div class="row full-height-md align-items-md-center" >
+                <div class="col-md-4 text-center text-md-left py-4 py-md-0" >
+                    <img src="/assets/img/logo.png" class="img-fluid Logo" >
+                </div>
+                <div class="col-md-8" >
+                    <h1 class="Header__title">Zet je dieet op de automatische piloot!</h1>
+                    <p class="Header__lead">
+                        Sjef genereert automatisch voedingsschema’s, gebaseerd op jouw profiel en doelen, die je kunt aanpassen op basis van je planning en voedsel voorkeuren.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <app-root></app-root>
+
+    <section class="Section Section--content" >
+        <div class="container" >
+            <div class="row justify-content-center mb-5" >
+                <div class="col-12 col-md-9" >
+                    <h1 class="text-center" >Beter eten</h1>
+                    <p class="text-h4">
+                        Wil jij aankomen, afvallen, of gewoon gezonder eten? Dan kun je er niet omheen; je zult je voeding in de gaten moeten houden. Maar je wil natuurlijk niet de hele dag calorieën tracken, of elke week weer variërende voedingschema's proberen te berekenen. Gelukkig doet Sjef dat nu allemaal voor je! En ook nog eens met één druk op de knop!
+                    </p>
+                </div>
+            </div>
+
+            <div class="row text-center justify-content-md-between justify-content-center mb-5" >
+                <div class="col-md Usp" >
+                    <div class="Usp__image" >
+                        <img src="/assets/img/icon-scale.svg" class="img-fluid" >
+                    </div>
+                    <h5>Nooit meer calorieen tracken</h5>
+                    <p>
+                        De voedingsschema’s van Sjef zijn gebaseerd op jouw energiebehoefte. Als je je aan het plan houdt, hoef je dus geen calorieen meer te tracken!
+                    </p>
+                </div>
+                <div class="col-md Usp" >
+                    <div class="Usp__image" >
+                        <img src="/assets/img/icon-bowl.svg" class="img-fluid" >
+                    </div>
+                    <h5>Geen keuzestress meer</h5>
+                    <p>
+                        Wat eten we vandaag is vanaf nu geen vraag meer. Zonder keuzestress houd je meer tijd over om lekker rustig te koken en te eten!
+                    </p>
+                </div>
+                <div class="col-md Usp" >
+                    <div class="Usp__image" >
+                        <img src="/assets/img/icon-cart.svg" class="img-fluid" >
+                    </div>
+                    <h5>Boodschappen doen wordt een eitje</h5>
+                    <p>
+                        Je boodschappenlijstjes worden automatisch gemaakt. Voorlopig moet je ze nog zelf doen, maar in de toekomst worden ze gewoon bezorgd!
+                    </p>
+                </div>
+            </div>
+
+            <div class="row text-center justify-content-center" >
+                <a href="#" class="Button" >Schrijf je nu <span class="text-black">gratis</span> in!</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="Footer text-center py-4" >
+        <p>Copyright &copy; Sjef <a href="//www.facebook.com/SjefApp/" class="ml-3" ><img width="48" src="/assets/img/facebook.svg" ></a></p>
+    </footer>
 </body>
 </html>

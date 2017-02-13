@@ -1,0 +1,12 @@
+.slideIn.hidden {
+    max-height: 0;
+    opacity: 0;
+
+    transition: opacity .4s ease, max-height 2s 0s;
+}
+
+.slideIn {
+    max-height: 10000px;
+    transition: max-height 2s, opacity .4s .4s ease;
+    overflow: hidden;
+}

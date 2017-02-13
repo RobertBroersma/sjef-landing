@@ -1,0 +1,22 @@
+.Input--line {
+    text-align: center;
+    font-weight: bold;
+    width: 110px;
+    padding-bottom: 8px;
+    margin-top: -4px;
+    margin: 0 10px;
+}
+
+.Input--line,
+.Input--line:focus {
+    outline: 0;
+    border: 0;
+    border-bottom: 1px solid $primary;
+}
+
+.Input--line::-webkit-outer-spin-button,
+.Input--line::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}

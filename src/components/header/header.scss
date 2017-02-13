@@ -1,0 +1,26 @@
+.Header {
+    height: 500px;
+    background-image: url('/assets/img/header.jpg');
+    background-size: cover;
+    background-position: center;
+    color: $white;
+    width: 100%;
+}
+
+.Header__title {
+    font-size: $font-size-h3;
+}
+
+.Header__lead {
+    font-size: $font-size-h5;
+}
+
+@include media-breakpoint-up(md) {
+    .Header__title {
+        font-size: $font-size-h1;
+    }
+
+    .Header__lead {
+        font-size: $font-size-h4;
+    }
+}
