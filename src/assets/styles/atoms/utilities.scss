@@ -1,0 +1,19 @@
+.text-black {
+    color: $black;
+}
+
+@include media-breakpoint-up(md) {
+    .full-height-md {
+        height: 100%;
+    }
+
+    .ml-md-a {
+        margin-left: auto !important;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .w-a-lg {
+        width: auto !important;
+    }
+}

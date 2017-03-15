@@ -1,0 +1,9 @@
+.Logo {
+    max-width: 40%;
+}
+
+@include media-breakpoint-up(sm) {
+    .Logo {
+        max-width: 100%;
+    }
+}

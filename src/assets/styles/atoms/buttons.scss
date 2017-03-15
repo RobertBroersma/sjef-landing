@@ -1,0 +1,43 @@
+.Button {
+    background-color: $primary;
+    padding: 10px 30px;
+    display: inline-block;
+    color: $white;
+    font-size: $font-size-h4;
+    font-weight: 700;
+    border: 0;
+    border-bottom: 5px solid darken($primary, 20%);
+    position: relative;
+    min-width: 200px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.Button[disabled] {
+    opacity: 0.7;
+}
+
+.Button--small {
+    font-size: $font-size-h5;
+    padding: 8px 20px;
+    min-width: 180px;
+}
+
+.Button:hover,
+.Button:visited,
+.Button:focus,
+.Button:active {
+    outline: 0;
+    margin-top: 4px;
+    color: $white;
+    border-bottom-width: 1px;
+
+    &[disabled] {
+        margin-top: 0;
+        border-bottom-width: 5px;
+    }
+}
+
+.Button i {
+    vertical-align: bottom;
+}

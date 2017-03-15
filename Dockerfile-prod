@@ -1,0 +1,5 @@
+FROM ubuntu
+
+ENV CLIENT_DIR /usr/src/client
+
+COPY ./dist $CLIENT_DIR
