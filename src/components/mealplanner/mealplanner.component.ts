@@ -1,24 +1,27 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Http} from '@angular/http';
+import {ActivatedRoute, Params} from '@angular/router';
 import * as _ from 'underscore';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'mealplanner',
     templateUrl: 'mealplanner.html'
 })
-export class Mealplanner {
+export class Mealplanner implements OnInit {
     loading: boolean = false;
     mealPlan: any = null;
     form = {
         energy: 2500,
         no_meals: 3
     };
+    fixedRecipe = 0;
 
     public pieChartLabels:string[] = ['Koolhydraten', 'Eiwitten', 'Vetten'];
     public pieChartData:number[] = [0,0,0];
     public pieChartType:string = 'doughnut';
 
-    constructor(public http: Http) {
+    constructor(public http: Http, private route: ActivatedRoute) {
         this.mealPlan = JSON.parse(localStorage.getItem('mealPlan'));
         if (this.mealPlan) {
             this.calculatePieChartData();
@@ -26,27 +29,62 @@ export class Mealplanner {
         }
     }
 
+    ngOnInit() {
+        this.route.queryParams
+        .subscribe((params: Params) => {
+            this.fixedRecipe = +params['recipe_id'];
+            this.getMealPlan();
+        });
+    }
+
     getMealPlan() {
         this.loading = true;
 
-        let url = '/api/meals/preview_mealplan/';
-        url += '?energy=' + this.form.energy;
-        url += '&no_meals=' + this.form.no_meals;
-        url += '&carbs=0.5&protein=0.25&fat=0.25';
-        this.http.get(
-            url
-        )
-        .map(res => res.json())
-        .subscribe(res => {
-            this.loading = false;
-            this.mealPlan = res.sort((a, b) => a.day_planning.order - b.day_planning.order);
-            this.calculatePieChartData();
+        if (this.fixedRecipe > 0) {
+            let url = '/api/recipes/' + this.fixedRecipe + '/';
+            this.http.get(
+                url
+            )
+            .map(res => res.json())
+            .subscribe(
+            res => {
+                this.loading = false;
+                this.mealPlan = [
+                    {
+                        day_planning: {
+                            meal_setting: {
+                                label: 'Test',
+                            },
+                        },
+                        servings: 1,
+                        recipe: res,
+                    }
+                ];
+                this.calculatePieChartData();
+            },
+            err => {
+                this.loading = false;
+            });
+        } else {
+            let url = '/api/meals/preview_mealplan/';
+            url += '?energy=' + this.form.energy;
+            url += '&no_meals=' + this.form.no_meals;
+            url += '&carbs=0.5&protein=0.25&fat=0.25';
+            this.http.get(
+                url
+            )
+            .map(res => res.json())
+            .subscribe(res => {
+                this.loading = false;
+                this.mealPlan = res.sort((a, b) => a.day_planning.order - b.day_planning.order);
+                this.calculatePieChartData();
 
-            localStorage.setItem('mealPlan', JSON.stringify(this.mealPlan));
-        },
-        err => {
-            this.loading = false;
-        });
+                localStorage.setItem('mealPlan', JSON.stringify(this.mealPlan));
+            },
+            err => {
+                this.loading = false;
+            });
+        }
     }
 
     setFormData() {
