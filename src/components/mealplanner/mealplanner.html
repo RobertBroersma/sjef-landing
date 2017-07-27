@@ -26,7 +26,7 @@
                         <div class="Meal" *ngFor="let meal of mealPlan">
                             <div class="row no-gutters align-items-center justify-content-start flex-md-nowrap text-center text-md-left" >
                                 <div class="Meal__image mb-3 mb-md-0">
-                                    <img [src]="meal.recipe.img_filename ? '/static/' + meal.recipe.img_filename : meal.recipe.image" >
+                                    <img [src]="meal.recipe.image" >
                                 </div>
                                 <div class="Meal__copy mb-3 mb-md-0">
                                     <h3>{{meal.day_planning.meal_setting.label}} <small>{{meal.servings * meal.recipe.energy}} kcal</small></h3>
