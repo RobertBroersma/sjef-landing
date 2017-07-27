@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Headers} from '@angular/http';
 import {ActivatedRoute, Params} from '@angular/router';
 import * as _ from 'underscore';
 import 'rxjs/add/operator/switchMap';
@@ -37,6 +37,12 @@ export class Mealplanner implements OnInit {
         });
     }
 
+    createHeaders(): Headers {
+        let headers = new Headers();
+        headers.append('Access-Control-Allow-Origin', '*');
+        return headers;
+    }
+
     getMealPlan() {
         this.loading = true;
 
@@ -66,12 +72,13 @@ export class Mealplanner implements OnInit {
                 this.loading = false;
             });
         } else {
-            let url = '//api.sjefapp.com/api/meals/preview_mealplan/';
+            let url = 'https://api.sjefapp.com/api/meals/preview_mealplan/';
             url += '?energy=' + this.form.energy;
             url += '&no_meals=' + this.form.no_meals;
             url += '&carbs=0.5&protein=0.25&fat=0.25';
             this.http.get(
-                url
+                url,
+                { headers: this.createHeaders() }
             )
             .map(res => res.json())
             .subscribe(res => {
