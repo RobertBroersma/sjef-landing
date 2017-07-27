@@ -2,6 +2,7 @@
 
 import './polyfills.ts';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/startWith';
 import 'chart.js';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';

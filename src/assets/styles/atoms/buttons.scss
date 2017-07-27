@@ -2,7 +2,7 @@
     background-color: $primary;
     padding: 10px 30px;
     display: inline-block;
-    color: $white;
+    color: $white !important;
     font-size: $font-size-h4;
     font-weight: 700;
     border: 0;
@@ -23,14 +23,17 @@
     min-width: 180px;
 }
 
+.Button:hover {
+    margin-top: 4px;
+    color: $white;
+    border-bottom-width: 1px;
+}
+
 .Button:hover,
 .Button:visited,
 .Button:focus,
 .Button:active {
     outline: 0;
-    margin-top: 4px;
-    color: $white;
-    border-bottom-width: 1px;
 
     &[disabled] {
         margin-top: 0;

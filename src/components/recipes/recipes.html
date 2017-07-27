@@ -1,0 +1,227 @@
+<div class="TopMenu" >
+    <div class="container d-flex justify-content-start align-items-center" >
+        <div class="TopMenu__logo" >
+            <img class="img-fluid" src="/assets/img/logo_hat.svg" >
+        </div>
+
+        <ul class="MenuLinks" >
+            <li class="MenuLinks__link" ><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >Home</a></li>
+            <li class="MenuLinks__link" ><a routerLink="/recipes" routerLinkActive="active" >Recepten</a></li>
+        </ul>
+    </div>
+</div>
+
+<header class="Header Header--small">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center">
+            <div class="col-md-8 align-items-center text-center">
+                <form class="Search" (ngSubmit)="fetchRecipes()" novalidate>
+                    <input class="Input Input--search" type="text" name="search" [(ngModel)]="filters.search" placeholder="Recepten zoeken">
+                    <button role="submit" class="Button Button--search"><i class="material-icons" >search</i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container Section Section--content">
+    <div class="row">
+        <div class="col-md-4 col-12 Filters">
+            <div class="Filters__content">
+                <div id="accordion" role="tablist" aria-multiselectable="true" class="mb-3">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between" role="tab" id="headingOne">
+                            <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Macro's
+                            </a>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="text-center pt-4">
+                                <a class="Button Button--small" (click)="calcgoal = !calcgoal">
+                                    <span [hidden]="calcgoal">Berekenen</span>
+                                    <span [hidden]="!calcgoal">Zelf invullen</span>
+                                </a>
+                            </div>
+
+                            <div *ngIf="calcgoal" class="card-block">
+                                <div class="form-group Filter Filter--noborder">
+                                    <label>Eiwitten <small>(g)</small></label>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <md-input-container>
+                                                <input mdInput placeholder="Gegeten" [(ngModel)]="macroCalculator.protein_in">
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-6">
+                                            <md-input-container>
+                                                <input mdInput placeholder="Doel" [(ngModel)]="macroCalculator.protein_goal">
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group Filter Filter--noborder">
+                                    <label>Koolhydraten <small>(g)</small></label>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <md-input-container>
+                                                <input mdInput placeholder="Gegeten" [(ngModel)]="macroCalculator.carbs_in">
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-6">
+                                            <md-input-container>
+                                                <input mdInput placeholder="Doel" [(ngModel)]="macroCalculator.carbs_goal">
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group Filter Filter--noborder">
+                                    <label>Vetten <small>(g)</small></label>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <md-input-container>
+                                                <input mdInput placeholder="Gegeten" [(ngModel)]="macroCalculator.fat_in">
+                                            </md-input-container>
+                                        </div>
+                                        <div class="col-6">
+                                            <md-input-container>
+                                                <input mdInput placeholder="Doel" [(ngModel)]="macroCalculator.fat_goal">
+                                            </md-input-container>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center pt-4">
+                                    <button class="Button Button--small" [disabled]="loading" (click)="calculateMacros()">
+                                       <span [hidden]="loading" >Go!</span>
+                                        <spinner [hidden]="!loading" ></spinner>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div *ngIf="!calcgoal" class="card-block">
+                                <div class="form-group Filter">
+                                    <label>Eiwitten <small>(%)</small></label>
+                                    <div>
+                                        <md-slider [min]="0" [max]="1" [step]="0.05" [thumbLabel]="true" [(ngModel)]="filters.protein_relative" (change)="fetchRecipes()"></md-slider>
+                                    </div>
+                                </div>
+
+                                <div class="form-group Filter">
+                                    <label>Koolhydraten <small>(%)</small></label>
+                                    <div>
+                                        <md-slider [min]="0" [max]="1" [step]="0.05" [thumbLabel]="true" [(ngModel)]="filters.carbs_relative" (change)="fetchRecipes()"></md-slider>
+                                    </div>
+                                </div>
+
+                                <div class="form-group Filter">
+                                    <label>Vetten <small>(%)</small></label>
+                                    <div>
+                                        <md-slider [min]="0" [max]="1" [step]="0.05" [thumbLabel]="true" [(ngModel)]="filters.fat_relative" (change)="fetchRecipes()"></md-slider>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingTwo">
+
+                            <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Recept details
+                            </a>
+
+                        </div>
+                        <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="card-block">
+                                <div class="form-group Filter">
+                                    <label>Tijd om te koken <small>(min.)</small></label>
+                                    <div>
+                                        <md-slider [min]="0" [max]="100" [thumbLabel]="true" [(ngModel)]="filters.cook_time__lte" (change)="fetchRecipes()"></md-slider>
+                                    </div>
+                                </div>
+
+                                <div class="form-group Filter">
+                                    <label>Aantal ingredienten</label>
+                                    <div>
+                                        <md-slider [min]="0" [max]="22" [thumbLabel]="true" [(ngModel)]="filters.ingredients_length__lte" (change)="fetchRecipes()"></md-slider>
+                                    </div>
+                                </div>
+
+                                <div class="form-group Filter">
+                                    <md-list>
+                                        <md-list-item *ngFor="let tag of tags">
+                                            <md-checkbox (change)="toggleTag(tag.id)">{{tag.label}}</md-checkbox>
+                                        </md-list-item>
+                                    </md-list>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" role="tab" id="headingThree">
+
+                            <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Ingredienten zoeken
+                            </a>
+
+                        </div>
+                        <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="card-block">
+                                <div class="form-group Filter">
+                                    <md-chip-list>
+                                        <md-chip class="mb-2" *ngFor="let ingredient of selectedIngredients" (click)="removeIngredient(ingredient)">{{ingredient.label}}</md-chip>
+                                    </md-chip-list>
+
+                                    <md-input-container>
+                                        <input #trigger mdInput placeholder="Ik heb..." [mdAutocomplete]="auto" [formControl]="ingredientCtrl">
+                                    </md-input-container>
+
+                                    <md-autocomplete #auto="mdAutocomplete">
+                                        <md-option *ngFor="let ingredient of filteredIngredients" (onSelectionChange)="selectIngredient(ingredient)" [value]="ingredient.label">
+                                            {{ ingredient.label }}
+                                        </md-option>
+                                    </md-autocomplete>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 *ngIf="resultSet?.count" class="font-weight-normal text-center">{{resultSet.count}} recepten</h4>
+                <!--<div class="form-group Filter" >
+                    <label>Energie <small>(kcal)</small></label>
+                    <div>
+                        <md-slider [min]="0" [max]="2000" [thumbLabel]="true" [(ngModel)]="filters.energy" (change)="fetchRecipes()" ></md-slider>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <div class="col-md-8 col-12">
+            <div class="row">
+                <a *ngFor="let recipe of recipes" [href]="recipe.source_url.replace('.json', '')" target="_blank" class="Card col-xl-4 col-lg-6 col-12" [class.u-opacity50]="loading" >
+                    <div class="Card__progress" [style.background-color]="getPercentageColor(1-recipe.macro_score)" [style.width]="getPercentageWidth(1-recipe.macro_score)"></div>
+                    <div class="Card__img" [style.background-image]="getImageUrl(recipe.img_filename)"></div>
+                    <div class="Chip" *ngIf="recipe.ingredients_score > 0" color="primary">{{recipe.ingredients_score}} / {{recipe.ingredients_length}}</div>
+                    <h4 class="Card__title">
+                        {{recipe.name}}
+                    </h4>
+                </a>
+
+                <div class="w-100 SpinnerWrapper" [hidden]="!loading" >
+                    <md-spinner class="mx-auto" color="accent"></md-spinner>
+                </div>
+
+                <div *ngIf="resultSet && resultSet.next" class="text-center col-12 py-4">
+                    <button (click)="loadMoreRecipes()" class="Button" [disabled]="loading">
+                        <span [hidden]="loading" >Laad meer recepten!</span>
+                        <spinner [hidden]="!loading" ></spinner>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<sjef-footer></sjef-footer>

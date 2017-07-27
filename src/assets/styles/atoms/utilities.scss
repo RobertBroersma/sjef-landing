@@ -2,6 +2,10 @@
     color: $black;
 }
 
+.u-opacity50 { 
+    opacity: 0.5;
+}
+
 @include media-breakpoint-up(md) {
     .full-height-md {
         height: 100%;

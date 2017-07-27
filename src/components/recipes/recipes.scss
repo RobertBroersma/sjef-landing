@@ -1,0 +1,139 @@
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  } 
+}
+
+.Card {
+    margin-bottom: 30px;
+    position: relative;
+    animation: grow .4s ease;
+}
+    
+.Card__img {
+    padding-bottom: 65%;
+    width: 100%;
+    height: 0;
+    background-size: cover;
+    background-position: center center;
+    margin-bottom: 10px;
+}
+
+.Card__title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.Chip {
+    color: $white !important;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 4px;
+    border-radius: $border-radius;
+    display: inline-block;
+}
+
+.Card .Chip {
+    position: absolute;
+    top: 14px;
+    margin-left: 10px;
+}
+
+.Card__progress {
+    height: 4px;
+    width: 0;
+}
+
+.Filter {
+    border-bottom: 1px solid $gray;
+}
+
+.Filter:last-child {
+    border-bottom: none;
+}
+
+.Filter md-slider {
+    width: 100%;
+}
+
+.Filter--noborder {
+    border-bottom: 0;
+}
+
+.Meta {
+    margin-bottom: 20px;
+}
+
+.card-header {
+    border-radius: 0;
+}
+
+.card {
+    border-radius: 0;
+}
+
+.card:not(:first-child) {
+    border-top: 0;
+}
+
+.Search {
+    display: inline-block;
+}
+
+.Button--search {
+    min-width: 0;
+    padding: 10px 20px;
+    border-bottom: 0;
+    float: left;
+    margin-left: 1px;
+}
+
+.Button--search:hover {
+    margin-top: 0;
+    background-color: darken($primary, 15%);
+}
+
+.Input--search {
+    border-radius: 0;
+    border: 0;
+    float: left;
+    width: 350px;
+}
+
+.TopMenu {
+    padding: 15px 0;
+    background-color: white;
+}
+
+.TopMenu__logo {
+    width: 50px;
+}
+
+.MenuLinks {
+    margin: 0 0 0 40px;
+    padding: 0;
+    list-style: none;
+}
+
+.MenuLinks__link {
+    float: left;
+    font-size: 18px;
+    font-weight: 200;
+}
+
+.MenuLinks__link a {
+    padding: 10px 15px;
+    border-bottom: 2px solid transparent;
+}
+
+.MenuLinks__link a:hover,
+.MenuLinks__link a.active {
+    border-bottom: 2px solid $primary;
+}
+
+.SpinnerWrapper {
+    position: absolute;
+    top: 10%;
+}

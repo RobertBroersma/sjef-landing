@@ -41,7 +41,7 @@ export class Mealplanner implements OnInit {
         this.loading = true;
 
         if (this.fixedRecipe > 0) {
-            let url = '/api/recipes/' + this.fixedRecipe + '/';
+            let url = '//api.sjefapp.com/api/recipes/' + this.fixedRecipe + '/';
             this.http.get(
                 url
             )
