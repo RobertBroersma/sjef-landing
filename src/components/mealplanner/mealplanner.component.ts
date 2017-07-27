@@ -37,12 +37,6 @@ export class Mealplanner implements OnInit {
         });
     }
 
-    createHeaders(): Headers {
-        let headers = new Headers();
-        headers.append('Access-Control-Allow-Origin', '*');
-        return headers;
-    }
-
     getMealPlan() {
         this.loading = true;
 
@@ -78,7 +72,6 @@ export class Mealplanner implements OnInit {
             url += '&carbs=0.5&protein=0.25&fat=0.25';
             this.http.get(
                 url,
-                { headers: this.createHeaders() }
             )
             .map(res => res.json())
             .subscribe(res => {
