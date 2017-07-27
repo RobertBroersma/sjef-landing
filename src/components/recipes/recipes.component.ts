@@ -69,7 +69,7 @@ export class Recipes implements OnInit {
     }
 
     filterIngredients(val: string) {
-        this.http.get('/api/ingredients/?search=' + val)
+        this.http.get('//api.sjefapp.com/api/ingredients/?search=' + val)
         .map(res => res.json())
         .subscribe(res => {
             this.filteredIngredients = res.results;
@@ -90,7 +90,7 @@ export class Recipes implements OnInit {
     ngOnInit() {
         this.fetchRecipes();
 
-        this.http.get('/api/tags/')
+        this.http.get('//api.sjefapp.com/api/tags/')
         .map(res => res.json())
         .subscribe(
             res => {
@@ -138,7 +138,7 @@ export class Recipes implements OnInit {
 
     fetchRecipes() {
         this.loading = true;
-        let url = '/api/recipes/?';
+        let url = '//api.sjefapp.com/api/recipes/?';
         for (let key in this.filters) {
             let value = this.filters[key];
             if (_(value).isArray()) {

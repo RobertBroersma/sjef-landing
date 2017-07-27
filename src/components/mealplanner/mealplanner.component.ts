@@ -66,7 +66,7 @@ export class Mealplanner implements OnInit {
                 this.loading = false;
             });
         } else {
-            let url = '/api/meals/preview_mealplan/';
+            let url = '//api.sjefapp.com/api/meals/preview_mealplan/';
             url += '?energy=' + this.form.energy;
             url += '&no_meals=' + this.form.no_meals;
             url += '&carbs=0.5&protein=0.25&fat=0.25';
