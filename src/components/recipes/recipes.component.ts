@@ -102,8 +102,8 @@ export class Recipes implements OnInit {
         );
     }
 
-    getImageUrl(filename) {
-        return this.sanitizer.bypassSecurityTrustStyle('url("/static/' + filename + '"');
+    getImageUrl(file) {
+        return this.sanitizer.bypassSecurityTrustStyle(`url(${file})`);
     }
 
     toggleTag(tag_id) {
