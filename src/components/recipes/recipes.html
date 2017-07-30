@@ -202,7 +202,7 @@
             <div class="row">
                 <a *ngFor="let recipe of recipes" [href]="recipe.source_url.replace('.json', '')" target="_blank" class="Card col-xl-4 col-lg-6 col-12" [class.u-opacity50]="loading" >
                     <div class="Card__progress" [style.background-color]="getPercentageColor(1-recipe.macro_score)" [style.width]="getPercentageWidth(1-recipe.macro_score)"></div>
-                    <div class="Card__img" [style.background-image]="getImageUrl(recipe.img_filename)"></div>
+                    <div class="Card__img" [style.background-image]="recipe.image"></div>
                     <div class="Chip" *ngIf="recipe.ingredients_score > 0" color="primary">{{recipe.ingredients_score}} / {{recipe.ingredients_length}}</div>
                     <h4 class="Card__title">
                         {{recipe.name}}
