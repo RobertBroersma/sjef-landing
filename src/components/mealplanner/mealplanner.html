@@ -1,70 +1,110 @@
-<section class="Section" >
-    <div class="container" >
-        <div class="MealPlanner" >
-            <div class="MealPlanner__form align-items-center justify-content-center justify-content-lg-between d-lg-flex text-center" >
-                <div class="float-lg-left text-h4 text-center w-100 w-a-lg MealPlanner__inputs" >
-                    <div class="float-lg-left" >Ik wil</div>
-                    <div class="float-lg-left mb-3 mb-lg-0" >
-                        <input class="Input--line" type="number" [(ngModel)]="form.energy" step="1" min="100" max="10000" >
-                    </div>
-                    <div class="float-lg-left" >calorieen eten in</div>
-                    <div class="float-lg-left mb-3 mb-lg-0" >
-                        <input class="Input--line" type="number" [(ngModel)]="form.no_meals" step="1" min="1" max="10" >
-                    </div>
-                    <div class="float-lg-left" >maaltijden</div>
-                </div>
-                <button role="button" [disabled]="loading" class="Button" (click)="getMealPlan()" >
-                    <span [hidden]="loading" >Go!</span>
-                    <spinner [hidden]="!loading" ></spinner>
-                </button>
-            </div>
-
-            <div class="slideIn hidden" [class.hidden]="!mealPlan" >
-                <hr class="mt-3 mb-5">
-                <div class="row align-items-center" >
-                    <div class="col-xl-9 mb-4 mb-xl-0" >
-                        <div class="Meal" *ngFor="let meal of mealPlan">
-                            <div class="row no-gutters align-items-center justify-content-start flex-md-nowrap text-center text-md-left" >
-                                <div class="Meal__image mb-3 mb-md-0">
-                                    <img [src]="meal.recipe.image" >
-                                </div>
-                                <div class="Meal__copy mb-3 mb-md-0">
-                                    <h3>{{meal.day_planning.meal_setting.label}} <small>{{meal.servings * meal.recipe.energy}} kcal</small></h3>
-                                    <p>{{meal.servings}} &times; {{meal.recipe.name}} <small>({{meal.recipe.owner.user.username}})</small></p>
-                                </div>
-                                <div class="ml-0 ml-md-a Meal__buttons text-center text-md-right">
-                                    <div class="d-flex justify-content-center mb-3">
-                                        <div class="MiniChart" >
-                                            <canvas baseChart
-                                                  [data]="[meal.recipe.carbs_relative, meal.recipe.protein_relative, meal.recipe.fat_relative]"
-                                                  [chartType]="pieChartType"
-                                                  [options]="{legend: {display: false}, tooltips: {enabled: false}}">
-                                            </canvas>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <a target="_blank" [href]="meal.recipe.source_url.replace('.json', '')" class="Button Button--small" >
-                                            <i class="material-icons">link</i>
-                                            Ga naar Recept
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 text-center" >
-                        <div class="ml-md-3 Chart">
-                            <canvas baseChart
-                                  [data]="pieChartData"
-                                  [labels]="pieChartLabels"
-                                  [chartType]="pieChartType"
-                                  [options]="{legend: {position:'bottom'}}">
-                            </canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<section class="Section">
+  <div class="container">
+    <div class="MealPlanner">
+      <div
+        class="MealPlanner__form align-items-center justify-content-center justify-content-lg-between d-lg-flex text-center"
+      >
+        <div
+          class="float-lg-left text-h4 text-center w-100 w-a-lg MealPlanner__inputs"
+        >
+          <div class="float-lg-left">Ik wil</div>
+          <div class="float-lg-left mb-3 mb-lg-0">
+            <input
+              class="Input--line"
+              type="number"
+              [(ngModel)]="form.energy"
+              step="1"
+              min="100"
+              max="10000"
+            />
+          </div>
+          <div class="float-lg-left">calorieen eten in</div>
+          <div class="float-lg-left mb-3 mb-lg-0">
+            <input
+              class="Input--line"
+              type="number"
+              [(ngModel)]="form.no_meals"
+              step="1"
+              min="1"
+              max="10"
+            />
+          </div>
+          <div class="float-lg-left">maaltijden</div>
         </div>
+        <button
+          role="button"
+          [disabled]="loading"
+          class="Button"
+          (click)="getMealPlan()"
+        >
+          <span [hidden]="loading">Go!</span>
+          <spinner [hidden]="!loading"></spinner>
+        </button>
+      </div>
+
+      <div class="slideIn hidden" [class.hidden]="!mealPlan">
+        <hr class="mt-3 mb-5" />
+        <div class="row align-items-center">
+          <div class="col-xl-9 mb-4 mb-xl-0">
+            <div class="Meal" *ngFor="let meal of mealPlan">
+              <div
+                class="row no-gutters align-items-center justify-content-start flex-md-nowrap text-center text-md-left"
+              >
+                <div class="Meal__image mb-3 mb-md-0">
+                  <img
+                    [src]="meal.recipe.source_img.replace('www.ah.nl.kpnis', 'static.ah')"
+                  />
+                </div>
+                <div class="Meal__copy mb-3 mb-md-0">
+                  <h3>
+                    {{meal.day_planning.meal_setting.label}}
+                    <small>{{meal.servings * meal.recipe.energy}} kcal</small>
+                  </h3>
+                  <p>{{meal.servings}} &times; {{meal.recipe.name}}</p>
+                </div>
+                <div
+                  class="ml-0 ml-md-a Meal__buttons text-center text-md-right"
+                >
+                  <div class="d-flex justify-content-center mb-3">
+                    <div class="MiniChart">
+                      <canvas
+                        baseChart
+                        [data]="[meal.recipe.carbs_relative, meal.recipe.protein_relative, meal.recipe.fat_relative]"
+                        [chartType]="pieChartType"
+                        [options]="{legend: {display: false}, tooltips: {enabled: false}}"
+                      >
+                      </canvas>
+                    </div>
+                  </div>
+
+                  <div>
+                    <a
+                      target="_blank"
+                      [href]="meal.recipe.source_url.replace('.json', '')"
+                      class="Button Button--small"
+                    >
+                      <i class="material-icons">link</i>
+                      Ga naar Recept
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 text-center">
+            <div class="ml-md-3 Chart">
+              <canvas
+                baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [chartType]="pieChartType"
+                [options]="{legend: {position:'bottom'}}"
+              >
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>

@@ -1,30 +1,32 @@
 .Header {
-    height: 500px;
-    background-image: url('/assets/img/header.jpg');
-    background-size: cover;
-    background-position: center;
-    color: $white;
-    width: 100%;
+  height: 500px;
+  background-image: url("/assets/img/header.jpg");
+  background-size: cover;
+  background-position: center;
+  color: $white;
+  width: 100%;
 }
 
 .Header--small {
-    height: 200px;
+  height: 200px;
 }
 
 .Header__title {
-    font-size: $font-size-h3;
+  font-size: $font-size-h3;
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.75);
 }
 
 .Header__lead {
-    font-size: $font-size-h5;
+  font-size: $font-size-h5;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 1);
 }
 
 @include media-breakpoint-up(md) {
-    .Header__title {
-        font-size: $font-size-h1;
-    }
+  .Header__title {
+    font-size: $font-size-h1;
+  }
 
-    .Header__lead {
-        font-size: $font-size-h4;
-    }
+  .Header__lead {
+    font-size: $font-size-h4;
+  }
 }
